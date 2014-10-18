@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>News Plugin for CMSimple</title>
+		<meta name="robots" content="noindex, nofollow" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta name="copyright" content="David Stutz" />
+		
+		<script type="text/javascript" src="js/shAutoloader.js"></script>
+		<script type="text/javascript" src="js/shCore.js"></script>
+		
+		<script type="text/javascript" src="js/shBrushPhp.js"></script>
+		<script type="text/javascript" src="js/shBrushCss.js"></script>
+		 
+		<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+		<link href="css/shCoreDefault.css" rel="stylesheet" type="text/css" />
+		
+		<style type="text/css">
+			/* Colors: #005fa8 #f94405 */
+			#content,
+			#navigation {
+				font-family: "Liberation Sans", Helvetica, Arial, sans-serif;
+				font-size: 12pt;
+				color: #444444;
+				float: left;
+			}
+			#navigation {
+				width: 16%;
+				padding-right: 1%;
+				margin-right: 1%;
+				border-right: 1px solid #DDDDDD;
+				font-size: 90%;
+			}
+			#content {
+				width: 80%;
+			}
+			#content a,
+			#navigation a {
+				text-decoration: none;
+				color: #005fa8;
+			}
+			#content a:hover,
+			#navigation a:hover {
+				color: #f94405;
+			}
+			#content img {
+				border:1px solid #777;
+				padding:10px;
+				margin:10px;
+			}
+			#content h1 a, 
+			#content h2 a, 
+			#content h3 a, 
+			#content h4 a{
+				color: #444444;
+			}
+			#content h1 a:hover, 
+			#content h2 a:hover, 
+			#content h3 a:hover, 
+			#content h4 a:hover{
+				color: #444444;
+			}
+			#content h1 {
+				font-size: 20pt;
+				border-bottom: 1px solid #DDDDDD;
+			}
+			#content h2 {
+				font-size: 18pt;
+				border-bottom: 1px solid #DDDDDD;
+			}
+			#content h3 {
+				font-size: 16pt;
+				border-bottom: 1px solid #DDDDDD;
+			}
+			#content h4 {
+				font-size: 14pt;
+				border-bottom: 1px solid #DDDDDD;
+			}
+			#content .toplink {
+				margin-right: 1em;
+				color: #005fa8;
+			}
+			#content ul {
+				list-style-type: square;
+			}
+			#navigation ol {
+				list-style-type: upper-roman;
+				margin-left: 0;
+				padding-left: 1.6em;
+			}
+			#navigation ol ol {
+				list-style-type: decimal;
+				margin-left: .2em;
+				padding-left: .6em;
+			}
+			#navigation ol ol ol {
+				list-style-type: lower-latin;
+				margin-left: .2em;
+				padding-left: .6em;
+			}
+			#navigation ol ol ol ol {
+				list-style-type: lower-roman;
+				margin-left: .1em;
+				padding-left: .6em;
+			}
+			#content .notice {
+				padding:.8em;
+				margin-bottom:1.6em;
+				border:2px solid #ddd;
+				background:#FFF6BF;
+				color:#514721;
+				border-color:#FFD324;
+			}
+			#content .code {
+				font-family:"Courier New", Courier, monospace;
+				background: #FAFAFA;
+				border: 1px dotted #777777;
+				padding: 10px;
+				margin: 1em;
+				text-align: left;
+				word-wrap: break-word;
+			}
+			#content .code {
+				list-style-type: none;
+			}
+			#content .toplink {
+				float: right;
+				font-weight: normal;
+				font-size: 12pt;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div id="navigation">
+			<ol>
+				<li><a href="#introduction">Introduction</a></li>
+				<li><a href="#version">Version</a></li>
+				<li>
+					<a href="#requirements">Requirements</a>
+					<ol>
+						<li><a href="#requirements-php">PHP</a></li>
+						<li><a href="#requirements-cmsimple">Supported CMSimple versions</a></li>
+						<li><a href="#requirements-jQuery4cmsimple">jQuery4CMSimple</a></li>
+						<li><a href="#requirements-jQuery">jQuery</a></li>
+						<li><a href="#requirements-newsticker">Newsticker</a></li>
+						<li><a href="#requirements-newsslider">Newsslider</a></li>
+					</ol>
+				</li>
+				<li>
+					<a href="#upgrading">Upgrading</a>
+					<ol>
+						<li><a href="#upgrading-from-1-0">Upgrading from version 1.0.x</a></li>
+					</ol>
+				</li>
+				<li>
+					<a href="#installation">Installation</a>
+					<ol>
+						<li><a href="#installation-xh">CMSimple XH</a></li>
+						<li><a href="#installation-other">CMSimple 3.3 and CMSimple LE</a></li>
+					</ol>
+				</li>
+				<li>
+					<a href="#configuration">Configuration</a>
+					<ol>
+						<li><a href="#configuration-general">General</a></li>
+						<li><a href="#configuration-options">Configuration options</a></li>
+						<li><a href="#configuration-file">The configuration file</a></li>
+						<li><a href="#configuration-backend">Backend configuration</a></li>
+					</ol>
+				</li>
+				<li>
+					<a href="#usage">Usage</a>
+					<ol>
+						<li><a href="#usage-calling-plugin">Calling the plugin</a></li>
+						<li><a href="#usage-newscase">Calling the newscase</a></li>
+						<li><a href="#usage-newsticker">Calling the newsticker</a></li>
+						<li><a href="#usage-template-newsticker">Calling the newsticker in the template</a></li>
+                        <li><a href="#usage-newsscroller">Calling the newsscroller</a></li>
+						<li><a href="#usage-template-newsscroller">Calling the newsscroller in the template</a></li>
+						<li><a href="#usage-newsslider">Calling the newsslider</a></li>
+						<li><a href="#usage-template-newsslider">Calling the newsslider in the template</a></li>
+						<li><a href="#usage-archive">News archive</a></li>
+					</ol>
+				</li>
+				<li>
+					<a href="#rss">RSS feed</a>
+					<ol>
+						<li><a href="#rss-config">RSS configuration</a></li>
+						<li><a href="#rss-link">RSS feed link</a></li>
+					</ol>
+				</li>
+				<li>
+					<a href="#backend">Backend</a>
+					<ol>
+						<li>
+							<a href="#backend-categories">Managing categories</a>
+							<ol>
+								<li><a href="#backend-categories-new">Create a new category</a></li>
+                                <li><a href="#backend-category-config">Category configuration</a></li>
+								<li><a href="#backend-categories-remove">Remove a category</a></li>
+							</ol>
+						</li>
+						<li>
+							<a href="#backend-news">Managing news</a>
+							<ol>
+								<li><a href="#backend-news-add">Add news</a></li>
+								<li><a href="#backend-news-publish">Publish news</a></li>
+								<li><a href="#backend-news-takeout">Take out news</a></li>
+								<li><a href="#backend-news-edit">Edit news</a></li>
+								<li><a href="#backend-news-delete">Delet news</a></li>
+							</ol>
+						</li>
+					</ol>
+				</li>
+				<li><a href="#custom-styling">Custom styling</a></li>
+				<li><a href="#icons">Icons</a></li>
+				<li><a href="#notes">Notes</a></li>
+				<li><a href="#changelog">Changelog</a></li>
+				<li>
+					<a href="#license">License</a>
+					<ol>
+						<li><a href="#license-plugin">The plugin's license</a></li>
+						<li><a href="#license-jQuery">jQuery</a></li>
+						<li><a href="#license-newsticker">Newsticker</a></li>
+                        <li><a href="#license-newsscroller">Newsscroller</a></li>
+						<li><a href="#license-newsslider">Newsslider</a></li>
+					</ol>
+				</li>
+			</ol>
+		</div>
+		
+		<div id="content">
+			<h1>News Plugin for CMSimple</h1>
+			
+				<h2><a name="introduction">Introduction</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<p>This plugin simplifies publishing news on your CMSimple Website. News can be published in different categories.</p>
+					<img src="news.png" alt="News frontend preview."/>
+				
+					<p>Additionally the plugin supports a smart and simple BBC-like newsticker powered by the newsticker jQuery plugin.</p>
+					<img src="newsticker.png" alt="Newsticker."/>
+				
+				<h2><a name="version">Version</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<p>This is currently version 1.1.0 of the plugin, released 18th October 2014.</p>
+								
+				<h2><a name="requirements">Requirements</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<h3><a name="requirements-php">PHP</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<p>The plugin works using <code>fgetcsv()</code> and <code>fputcsv()</code> so requires a PHP version 5 or higher, which is supported by most providers.</p>
+					
+					<h3><a name="requirements-cmsimple">Supported CMSimple versions</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<ul>
+							<li><b>CMSimple XH 1.5 or higher (recommended)</b></li>
+							<li>CMSimple XH 1.4.2</li>
+							<li>CMSimple XH 1.1.4</li>
+							<li>CMSimple Realblog 1.5 or higher</li>
+							<li style="text-decoration: line-through;">CMSimple LE 3.4(.1) (Pluginloader needed, see installation guide below)</li>
+							<li style="text-decoration: line-through;">CMSimple 3.3 (Pluginloader needed, see installation guide below)</li>
+						</ul>
+				
+					<h3><a name="requirements-jQuery4cmsimple">jQuery4CMSimple</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p class="notice">The plugin will work without jQuery4CMSimple, but <b>the use of jQuery4CMSimple is highly recommended</b>!</p>
+				
+						<p>Get jQuery4CMSimple: <a href="http://www.cmsimple-xh.com/wiki/doku.php/plugins:jQuery4cmsimple" target="_blank">jQuery4CMSimple</a></p>
+				
+						<p>The plugin uses jQuery4CMSimple if available. This will reduce the possibility of clashes with other plugins and improve the site's web performance, because jQuery and used plugins are included only once.</p>
+				
+					<h3><a name="requirements-jQuery">jQuery</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>The plugin requires jQuery for the newsticker functionality. The plugin will use jQuery4CMSimple if available. If not the current jQuery version 1.7.1 will be used automatically.</p>
+				
+					<h3><a name="requirements-newsticker">Newsticker</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>The plugin's newsticker functionality uses the newsticker jQuery plugin version 1.8. The plugin will be included using jQuery4CMSimple or by the News plugin itself automatically.</p>
+				
+					<h3><a name="requirements-newsslider">Newsslider</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>The newssldier is based on bxSlider jQuery plugin version 3.0. The plugin will be included using jQuery4CMsimple or the News plugin itself automatically.</p>
+				
+				<h2><a name="upgrading">Upgrading</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<h3><a name="upgrading-from-1-0">Upgrading from version 1.0.x</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<p>First of all: <b>make a backup of the whole CMSimple installation!</b> Upgrading from version 1.0.x is very easy. Just check that your category files will not be deleted. The location of the files is defined by the <b>filepath</b> configuration key of version 1.0.x. Backup your old configuration file of the plugin found in plugins/news/config/config.php. Now delete the old news plugin and extract the new version in the plugins folder. If you have not changed the following configuration keys you are done and the plugin should automatically detect your categories and the entries.</p>
+						
+						<ul>
+							<li><b>filepath</b> now named <b>csv_filepath</b>.</li>
+							<li><b>delimiter</b> now named <b>csv_delimiter</b>.</li>
+							<li><b>enclosure</b> now named <b>csv_enclosure</b>.</li>
+						</ul>
+					
+						<p>If you have made changes on these configuration keys, copy the configurations of your configuration backup.</p>
+						
+						<p>Then you can customize the other configuration keys.</p>
+				
+				<h2><a name="installation">Installation</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<h3><a name="installation-xh">CMSimple XH</a><a class="toplink" href="#">Back to top</a></h3>
+						<ul>
+							<li>Download the plugin.</li>
+							<li>In the <code>plugins</code> folder, create a new subfolder called <code>news</code></li>
+							<li>Extract the files into the <code>news</code> folder.</li>
+							<li>Move <code>rss.php</code> to the CMSimple root.</li>
+							<li>The plugin stores the categories in CSV files in <code>/content/plugins/news</code>. The folder is created automatically (mostly).This folder needs write and read permissions. The plugin checks this permissions and tries to alter this permissions if needed.</li>
+							<li>Go into backend and see if the installation is detected correctly.</li>
+						</ul>
+					
+					<h3><a name="installation-other">CMSimple 3.3 and CMSimple LE</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<p class="notice">This installation guide is left from older versions. This version does not support CMSimple LE and the original CMSimple, see <a href="#requirements-cmsimple">supported CMSimple versions</a></p>
+					
+						<p>The images are taken in CMSimple 3.3, but should help installing the plugin in CMSimple LE, too.</p>
+						<ul>
+							<li>Download a working Pluginloader, see <a href="http://cmsimplewiki.com/doku.php/pluginloader/pluginloader">CMSimple Wiki: Pluginloader</a> or the <a href="http://www.cmsimpleforum.com/">CMSimple Forum</a> to get the current version.</li>
+							<li>Create a folder named <code>plugins</code> in the CMSimple root directory.</li>
+							<li>Extract the pluginloader into this directory. Check that both <code>plugins/index.php</code> and <code>plugins/pluginloader</code> are there.</li>
+							<li>Edit cmsimple/config.php and add: </li>
+						</ul>
+						<pre class="brush: php">
+$cf['plugins']['folder'] = "plugins";
+						</pre>
+						<ul>
+							<li>Go in your CMSimple backend, choose 'Settings' and edit configuration:</li>
+						</ul>
+							
+							<img src="news-cmsimple-3-3.png" alt="CMSimple 3.3 settings." />
+
+						<ul>
+							<li>Look for the plugins_folder configuration key:</li>
+						</ul>
+						
+						<img src="news-cmsimple-3-3-config.png" alt="CMSimple plugins_folder configuration." />
+						
+						<ul>
+							<li>In the <code>plugins</code> folder, create a subfolder called <code>news</code></li>
+							<li>Extract the files into the <code>news</code> folder.</li>
+							<li>Move <code>rss.php</code> to the CMSimple root.</li>
+						</ul>
+				
+				<h2><a name="configuration">Configuration</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<h3><a name="configuration-general">General</a><a class="toplink" href="#">Back to top</a></h3>
+					
+					<p>Some general notes about configuration:</p>
+					
+					<ul>
+						<li>To each configuration key there is the type of excepted value given with the help text, read them carefully before making changes!</li>
+						<li>Unsigned integer means a positive integer (including zero). Only digits accepted. Examples: 0, 011, 115, 1, 3.</li>
+						<li>If a number of valid options are given these are case-sensitive. Example: 'true', 'false', 'fade'.</li>
+						<li>An empty field is not always a valid input.</li>
+					</ul>
+				
+					<p>Configuration can either be done by directly editing config.php or by using the backend.</p>
+					
+					<h3><a name="configuration-options">Configuration options</a><a class="toplink" href="#">Back to top</a></h3>
+					
+					<ul>
+						<li><b>csv_filepath</b>: The path where to store the news CSV files, relative to CMSimple root. Without ending '/'. String.</li>
+						<li><b>csv_delimiter</b>: The delimiter used between cells in all CSV files. Single character (ASCII).</li>
+						<li><b>csv_enclosure</b>: The enclosure used in all CSV files. Must be a single ASCII character. See <a href="http://en.wikipedia.org/wiki/ASCII">here</a> for a list with all ASCII characters.</li>
+						<li><b>rss_file</b>: The path of the RSS file including the file itself, relative to CMSimple root.</li>
+					</ul>
+					<p class="notice">There is no need to edit <b>csv_filepath</b>, <b>csv_delimiter</b>, <b>csv_enclosure</b> or <b>rss_file</b>. Important: Do not edit these settings in production environments, all old categories and news won't be read correctly.</p>
+					<ul>
+                        <li><b>categories_sort_function</b>: Function to sort categories. Currently 'news_categories_sort_asc' or 'news_categories_sort_desc' are supported.</li>
+						<li><b>blog</b>: The system can either be used as classical news system or as more 'blog'-like systems. 'true' or 'false'.</li>
+					</ul>
+					<b>The 'blog' option</b>
+					<p>This plugin is not aimed to be a full-featured blog system. Nevertheless using additional plugins for comments and the archive functionality it could be used as one. But to maintain the 'classical' news functionality - meaning only very short news text and no archive functionality - this option is thought to switch between these two modes. If the blog option is enabled ('true') the title of each entry is shown as link and refers to the original fulltext, and a fulltext can be added in the backend. If the option is disabled ('false') the fulltext can not be added in the backend and the title of each entry will not be displayed as link.</p>
+					<ul>
+						<li><b>date_format</b>: The date format for the frontend. It is a date format like date() expects it, so see <a href="http://php.net/manual/de/function.date.php">the manual</a>. String.</li>
+						<li><b>date_format_backend</b>: Defines the date format used in backend. Note that this format should be compatible with the format given in datepicker_format. Good choices are for example d.m.Y for date_format_backend and dd.mm.yyyy for datepicker_format (see below). String.</li>
+						<li><b>template_newsticker</b>: If you are using the newsticker functionality in your templates this option must be set to 'true' (case-sensitice). 'true' or 'false'.</li>
+						<li><b>template_newsslider</b>: If you are using the newsslider functionality in your templates this option must be set to 'true' (case-sensitice). 'true' or 'false'.</li>
+						<li><b>template_newsscroller</b>: If you are using the newsscroller functionality in your templates this option must be set to 'true' (case-sensitice). 'true' or 'false'.</li>
+                        <li><b>pagination_backend</b>: The number of entries per page in backend. Unsigned integer (not zero).</li>
+						<li><b>pagination_archive</b>: The number of entries per page in archive. Unsigned integer (not zero).</li>
+						<li><b>newsticker_speed</b>: The speed of the newsticker. Float between 0 and 1. For example 0.1 or 0.7.</li>
+						<li><b>newsticker_controls</b>: Enables or disables the controls of the newsticker. 'true' or 'false'.</li>
+						<li><b>newsticker_title_text</b>: The text displayed as title of the newsticker, can be positioned using CSS. String.</li>
+						<li><b>newsticker_effect</b>: The used effect for the newsticker. 'reveal' or 'fade'.</li>
+						<li><b>newsticker_delay</b>: The delay between the fading out of one entry and the fading in of the next. Unsigned integer.</li>
+						<li><b>newsticker_fade_in_speed</b>: The speed for fading in of an entry. Unsigned integer.</li>
+						<li><b>newsticker_fade_out_speed</b>: The speed for fading out of an entry. Unsigned integer.</li>
+						<li><b>newsslider_speed</b>: The speed of the newsslider. Unsigend integer between 1 and 5000.</li>
+						<li><b>newsslider_pause_hover</b>: Pause the newsslider on mouse over. 'true' or 'false'.</li>
+                        <li><b>newsscroller_speed</b>: Speed for the newsscroller. Default is 0.07.</li>
+						<li><b>datepicker_format</b>: Format used in datepicker. See possible formatting below.</li>
+					</ul>
+					<p>If the jQuery4CMSimple plugin (default in the current CMSimple XH version) is not installed the news plugin will include its own jQuery files. The used versions can be defined using the following options.</p>
+					<ul>
+						<li><b>jquery_core</b>: jQUery core file name. The jQuery (UI) javascript files are stored in news/jquery/js/. String.</li>
+						<li><b>jquery_ui</b>: jQUery UI javascript file name. The jQuery (UI) javascript files are stored in news/jquery/js/. String.</li>
+						<li><b>jquery_ui_css</b>: jQUery UI CSS file name. The jQuery (UI) CSS files are stored in news/jquery/css/. String.</li>
+					</ul>
+					
+					<b>Datepicker date formatting</b>
+					
+				    <ul>
+				    	<li>d - day of month (no leading zero)</li>
+				    	<li>dd - day of month (two digit)</li>
+					    <li>o - day of the year (no leading zeros)</li>
+					    <li>oo - day of the year (three digit)</li>
+					    <li>D - day name short</li>
+					    <li>DD - day name long</li>
+					    <li>m - month of year (no leading zero)</li>
+					    <li>mm - month of year (two digit)</li>
+					    <li>M - month name short</li>
+					   	<li>MM - month name long</li>
+					    <li>y - year (two digit)</li>
+					    <li>yy - year (four digit)</li>
+					    <li>@ - Unix timestamp (ms since 01/01/1970)</li>
+					    <li> ! - Windows ticks (100ns since 01/01/0001)</li>
+					    <li>'...' - literal text</li>
+					    <li>'' - single quote</li>
+					    <li>anything else - literal text</li>
+					</ul>
+					
+					<p>Also see <a href="http://docs.jquery.com/UI/Datepicker/formatDate">here</a>.</p>
+					
+					<h3><a name="configuration-file">The configuration file</a><a class="toplink" href="#">Back to top</a></h3>
+								
+					<pre class="brush: php">
+/** 
+ * Filepath storing CSV containing news.
+ * @warning NOTE: Without '/' at the end! 
+ * @var
+ */
+$plugin_cf['news']['csv_filepath']="content/plugins/news";
+/** 
+ * Delimiter for CSV. 
+ * @var
+ */
+$plugin_cf['news']['csv_delimiter']="#";
+/**
+ * Enclosure for CSV.
+ * @var
+ */
+$plugin_cf['news']['csv_enclosure']="\"";
+/**
+ * Using the news module as blog system.
+ * @var
+ */
+$plugin_cf['news']['blog']="false";
+/**
+ * Date format used in frontend.
+ * @var
+ */
+$plugin_cf['news']['date_format']="d.m.Y";
+/**
+ * Date format used in backend.
+ * Note that this format should be compatible with the datepicker format. Good choices are d.m.Y for date_format_backend and dd.mm.yyyy for datepicker_format.
+ * @var
+ */
+$plugin_cf['news']['date_format_backend']="d.m.Y";
+/**
+ * Include newsticker for use in templates.
+ * @var
+ */
+$plugin_cf['news']['template_newsticker']="false";
+/**
+ * Include bxslider for use in template.
+ * @var
+ */
+$plugin_cf['news']['template_newsslider']="false";
+/**
+ * RSS file with full path relative to CMSimple root.
+ * @var
+ */
+$plugin_cf['news']['rss_file'] = 'rss.php';
+/**
+ * Archive entries per page.
+ * @var
+ */
+$plugin_cf['news']['pagination_backend'] = '10';
+/**
+ * Backend entries per page.
+ * @var
+ */
+$plugin_cf['news']['pagination_archive'] = '10';
+
+/**
+ * Speed of newsticker reveal.
+ * @var
+ */
+$plugin_cf['news']['newsticker_speed']="0.1";
+/**
+ * Display newsticker controls (Stop, Resume, Next, Previous).
+ * @var
+ */
+$plugin_cf['news']['newsticker_controls']="true";
+/**
+ * Title text for newsticker.
+ * @var
+ */
+$plugin_cf['news']['newsticker_title_text']="Latest";
+/**
+ * Display (effect) type (reveal or fade).
+ * @var
+ */
+$plugin_cf['news']['newsticker_effect']="reveal";
+/**
+ * Time between news.
+ * @var
+ */
+$plugin_cf['news']['newsticker_delay']="2000";
+/**
+ * Fade in speed.
+ * @var
+ */
+$plugin_cf['news']['newsticker_fade_in_speed']="600";
+/**
+ * Fade out speed.
+ * @var
+ */
+$plugin_cf['news']['newsticker_fade_out_speed']="300";
+
+/**
+ * Bxslider speed. Value between 1 and 5000. Small value => fast ticker.
+ * @var
+ */
+$plugin_cf['news']['newsslider_speed']="2000";
+/**
+ * Pause ticker on hover.
+ * @var
+ */
+$plugin_cf['news']['newsslider_pause_hover']="true";
+/**
+ * Date format for datepicker.
+ * @var
+ * 
+ * Following conventions:
+ *      d - day of month (no leading zero)
+ *	    dd - day of month (two digit)
+ *	    o - day of the year (no leading zeros)
+ *	    oo - day of the year (three digit)
+ *	    D - day name short
+ *	    DD - day name long
+ *	    m - month of year (no leading zero)
+ *	    mm - month of year (two digit)
+ *	    M - month name short
+ *	    MM - month name long
+ *	    y - year (two digit)
+ *	    yy - year (four digit)
+ *	    @ - Unix timestamp (ms since 01/01/1970)
+ *	     ! - Windows ticks (100ns since 01/01/0001)
+ *	    '...' - literal text
+ *	    '' - single quote
+ *	    anything else - literal text 
+ * 
+ */
+$plugin_cf['news']['datepicker_format']="dd.mm.yy";
+/**
+ * jQuery core file. Found in news/jquery/js/.
+ * @var
+ */
+$plugin_cf['news']['jquery_core']="jquery-1.9.1.min.js";
+/**
+ * jQuery UI file. Found in news/jquery/js/.
+ * @var
+ */
+$plugin_cf['news']['jquery_ui']="jquery-ui-1.8.21.custom.min.js";
+/**
+ * jQuery UI CSS file. Found in news/jquery/css/.
+ * @var
+ */
+$plugin_cf['news']['jquery_ui_css']="jquery-ui-1.8.21.custom.css";
+					</pre>
+				
+					<h3><a name="configuration-backend">Backend configuration</a><a class="toplink" href="#">Back to top</a></h3>
+				
+					<p>See the help texts of the options to see if your changes are valid.</p>
+				
+					<img src="news-config.png" alt="Backend configuration." />
+				
+				<h2><a name="usage">Usage</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<h3><a name="usage-calling-plugin">Calling the plugin</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<p>For calling the plugin on some of your pages use one of the following scripts:</p>
+						
+						<ul>
+							<li>CMSimple scripting: <b>#CMSimple $o .= news('categoryname', 5); #</b></li>
+							<li>New CMSimple_XH scripting: <b>{{{PLUGIN:news('categoryname', 5);}}}</b></li>
+						</ul>
+						
+						<p>The function expects two parameters: The first one is a string containing a category name, an array with category names, or an empty string if all categories shall be displayed, the second parameter defines the number of entries displayed. There are two options:</p>
+						
+						<ul>
+							<li>A string with valid time period like strtotime() would expect it. Examples:</li>
+						</ul>
+						<pre class="brush: php">
+news('categoryname', '-1 week'); // Shows all entries of one week ago until now.
+news('categoryname', '-5 days'); // Shows all entries of the last five days.
+news('categoryname', '-1 month'); // All entries of the last month.
+news('categoryname', '-3 weeks'); // All entries of the last three weeks.
+news('', '-13 days'); // All entries of the last 13 days in all categories.
+news(array('categoryname1', 'categoryname2'), '-21 days'); // All entries of categoryname1 and categoryname2 of the last 21 days
+						</pre>
+						<ul>
+							<li>Simply a number defining how much entries shall be displayed. Examples:</li>
+						</ul>
+						<pre class="brush: php">
+news('categoryname', 5); // The last five entries, independant of their publishing dates.
+news('categoryname', 11); // The last 11 entries.
+news(array('categoryname1', 'categoryname2'), 3); // Three entries of the categories: categoryname1 and categoryname2
+						</pre>
+				
+					<h3><a name="usage-newscase">Calling the newscase</a><a class="toplink" href="#">Back to top</a></h3>
+
+						<p>Calling the newscase is interesting for usage within the template. For using the newscase within the template no additional configuraiton is required.</p>
+						
+						<pre class="brush: php">
+// Shows all entries of the last week.
+// Only the short description of the entry is shown.
+// The title of each entry references the complete news entry which is shown on the page 'News'.
+newscase('News', 'categoryname', '-1 week');
+						</pre>
+				
+					<p>The second and third parameters are known from above.</p>
+					
+					<p>The first parameter is a stirng referencing some othe page on the site. The easiest way to get this site name is to call the site in the frontend and copy the part of the url behind the ?. Example:</p>
+				
+					<pre class="brush: php">
+www.example.de?News
+www.example.de?Angebote_und_Aktionen
+					</pre>
+					
+					<p>Take the part behind the '?' which will reference the given site.</p>
+				
+					<h3><a name="usage-newsticker">Calling the newsticker</a><a class="toplink" href="#">Back to top</a></h3>
+						
+						<p>Calling the newsticker works using the following scripts:</p>
+				
+						<ul>
+							<li>CMSimple scripting: <b>#CMSimple $o .= newsticker('categoryname', 5); #</b></li>
+							<li>New CMSimple_XH scripting: <b>{{{PLUGIN:newsticker('categoryname', 5);}}}</b></li>
+						</ul>
+				
+						<p>The arguments are more or less the same as calling the news normally.</p>
+				
+						<p>The newsticker does only show the publishing date, the title and the link (if given) of the entry.</p>
+					
+					<h3><a name="usage-template-newsticker">Calling the newsticker in the template</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>Calling the newsticker in your templates requires the configuration key <b>template_newsticker</b> set to 'true', either by directly editing config.php or by configuring the plugin in backend.</p>
+				
+						<pre class="brush: php">
+$plugin_cf['news']['template_newsticker']="true";
+						</pre>
+						
+                        <p>In addition the plugin call changes to:</p>
+                        
+                        <pre class="brush: php">
+echo newsticker('categoryname', 5, TRUE);
+                        </pre>
+                        
+                        <p>where the TRUE indicates the usage within a template. Make sure to wrap this code within opening and closing php tags:</p>
+                        
+                        <pre class="brush: php">
+&lt;?php echo newsticker('categoryname', 5, TRUE); ?&gt;
+                        </pre>
+                        
+						<img src="news-template.png" />
+					
+                    <h3><a name="usage-newsscroller">Calling the newsscroller</a><a class="toplink" href="#">Back to top</a></h3>
+						
+						<p>Calling the newsscroller works using the following scripts:</p>
+				
+						<ul>
+							<li>CMSimple scripting: <b>#CMSimple $o .= newsscroller('categoryname', 5); #</b></li>
+							<li>New CMSimple_XH scripting: <b>{{{PLUGIN:newsscroller('categoryname', 5);}}}</b></li>
+						</ul>
+				
+						<p>The aruments are the same as for the newsticker or the news in general.</p>
+				
+						<p>The newsscroller shows the date and the title (as link if given) only.</p>
+					
+					<h3><a name="usage-template-newsticker">Calling the newsscroller in the template</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>Calling the newsscroller in your templates requires the configuration key <b>template_newsscroller</b> set to 'true', either by directly editing config.php or by configuring the plugin in backend.</p>
+				
+						<pre class="brush: php">
+$plugin_cf['news']['template_newsscroller']="true";
+						</pre>
+						
+                        <p>In addition the plugin call changes to:</p>
+                        
+                        <pre class="brush: php">
+echo newsscroller('categoryname', 5, TRUE);
+                        </pre>
+                        
+                        <p>where the TRUE indicates the usage within a template. Make sure to wrap this code within opening and closing php tags:</p>
+                        
+                        <pre class="brush: php">
+&lt;?php echo newsscroller('categoryname', 5, TRUE); ?&gt;
+                        </pre>
+                        
+						<img src="news-template.png" />
+                        
+					<h3><a name="usage-newsslider">Calling the newsslider</a><a class="toplink" href="#">Back to top</a></h3>
+						
+						<p>Calling the newsticker works using the following scripts:</p>
+				
+						<ul>
+							<li>CMSimple scripting: <b>#CMSimple $o .= newsslider('categoryname', 5); #</b></li>
+							<li>New CMSimple_XH scripting: <b>{{{PLUGIN:newsslider('categoryname', 5);}}}</b></li>
+						</ul>
+				
+						<p>The arguments are more or less the same as calling the news normally.</p>
+				
+					<h3><a name="usage-template-newsslider">Calling the newsslider in the template</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>Calling the newsslider in your templates requires only one configuration key set: <b>template_newsslider</b> must be set to 'true', either by directly editing config.php or by configuring the plugin in backend.</p>
+				
+						<pre class="brush: php">
+$plugin_cf['news']['template_newsslider']="true";
+						</pre>
+                        
+                        <p>In addition the plugin call changes to:</p>
+                        
+                        <pre class="brush: php">
+echo newsslider('categoryname', 5, TRUE);
+                        </pre>
+                        
+                        <p>where the TRUE indicates the usage within a template. Make sure to wrap this code within opening and closing php tags:</p>
+                        
+                        <pre class="brush: php">
+&lt;?php echo newsslider('categoryname', 5, TRUE); ?&gt;
+                        </pre>
+				
+					<h3><a name="usage-archive">News archive</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>Calling the news archive works using the following scripts:</p>
+				
+						<ul>
+							<li>CMSimple scripting: <b>#CMSimple $o .= newsarchive('categoryname'); #</b></li>
+							<li>New CMSimple_XH scripting: <b>{{{PLUGIN:newsarchive('categoryname');}}}</b></li>
+						</ul>
+						
+						<p>The function expects one parameter: The category name as string. The string cannot be empty!</p>
+						
+						<p>The news archive is supposed to get a whole CMSimple site. The archive currently only includes pagination. Set the number of entries shown per page using the configuration key <b>pagination_archive</b>.</p>
+				
+						<p>As title the category name will be used.</p>
+				
+						<img src="news-archive.png" alt="News archive." />
+				
+				<h2><a name="rss">RSS feed</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<p>To get the RSS feed working rss.php is required. The file is included in the download and it is recommended to place the file in the CMSimple root directory. Check that the <b>rss_file</b> configuration key matches the path to rss.php.</p>
+				
+					<h3><a name="rss-config">RSS configuration</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<p>Go to the category configuration using the settings icon of selected category (see <a href="#backend">Backend</a>).</p>
+						
+						<img src="news-rss-config.png" alt="RSS configuration." />
+						
+						<p>Fields:</p>
+						
+						<ul>
+							<li><b>rss_title</b>: The title of the RSS feed.</li>
+							<li><b>rss_description</b>: The description of the RSS feed.</li>
+							<li><b>rss_editor</b>: The editor responsible for the RSS feed.</li>
+                            <li><b>rss_link</b>: The link to the article (in blog mode) or the category page (not in blog mode).</li>
+						</ul>
+						
+					<h3><a name="rss-link">RSS feed link</a><a class="toplink" href="#">Back to top</a></h3>
+				
+						<p>Go to the category rss using the rss icon of selected category (see <a href="#backend">Backend</a>).</p>
+						
+						<img src="news-rss.png" alt="Category RSS link." />
+				
+				<h2><a name="backend">Backend</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<p>Select the plugin in your CMSimple backend. You will see some information about the plugin:</p>
+					<img src="news-info.png" alt="News information of installed version." />
+					
+					<p>Click "Manage entries" in the toolbar.</p>
+					
+					<p>The first thing to do is to create a category.</p>
+					<img src="news-first-category.png" alt="Create the first category." />
+					
+					<p>After creating a new category click "Manage entries" again:</p>
+					
+					<img src="news-backend.png" alt="News backend." />
+					
+					<h3><a name="backend-categories">Managing categories</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<p class="notice"><b>NOTE</b>: It is recommended to use a name without any whitespace or special (for example non-ascii) characters. The category name is used as file name for the CSV file storing the news and their content, so use only valid names for files.</p>
+						
+						<p>There are several options managing the categories:</p>
+						<ul>
+							<li>Create a new category.</li>
+							<li>Remove a category.</li>
+						</ul>
+						
+						<h4><a name="backend-categories-new">New categories</a><a class="toplink" href="#">Back to top</a></h4>
+						
+							<p>For creating a new category click the "New category" button. The form is the same as for creating the first category.</p>
+							
+							<table>
+								<tr>
+									<td><img src="../images/category/add.png" alt="New category button." /></td>
+									<td>New category button.</td>
+								</tr>
+							</table>
+                        
+                        <h4><a name="backend-category-config">Category configuration</a><a class="toplink" href="#">Back to top</a></h4>
+						
+                            <p>Each category offers several configuration options. Most of them can be found <a href="#rss-config">here</a> andare only important when using the RSS functionality. The configuration options left are:</p>
+                            
+                            <ul>
+                                <li><b>news_link</b>: In blog mode each entry has its own link. When not in blog mode this option can be used to give the category an own link (for example a news page or the news archive). The title of each entry within this category will be rendered as link (as in blog mode) and point to the link configured in <b>news_link</b>.</li>
+                            </ul>
+                            
+						<h4><a name="backend-categories-remove">Deleting a category</a><a class="toplink" href="#">Back to top</a></h4>
+						
+							<p>For deleting a category click the "Delete category" button. Note: All news entries in the category will be deleted, too.</p>
+							
+							<table>
+								<tr>
+									<td><img src="../images/category/delete.png" alt="Delete category button." /></td>
+									<td>Delete category button.</td>
+								</tr>
+							</table>
+							
+							<img src="news-delete-category.png" alt="Delete category." />
+							
+					<h3><a name="backend-news">Managing entries</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						<p>There are several options to manage the entries of your categories:</p>
+						<ul>
+							<li>Add news.</li>
+							<li>Publish news.</li>
+							<li>Edit news.</li>
+							<li>Delete news.</li>
+						</ul>
+						
+						<p>Fields:</p>
+						<ul>
+							<li><b>Title</b>: The title of the entry.</li>
+							<li><b>Short</b>: Short description. The preface of the entry.</li>
+							<li><b>Description</b>: The body of the entry.</li>
+						</ul>
+						
+						<p><b>How about using special characters and quotiation marks within the fields?</b></p>
+						
+						<p>Currently special characters and especially quotation marks can be used for the title, the description and the link title. This is accomplished using a combination of using htmlspecialchars($content, ENT_QUOTES) for saving the data to the CSV file and using html_entity_decode() for displaying the descritpion. For the description and short description the use of HTML code is ok.</p>
+						
+						<p class="notice">Note: There can still be combinations of characters this solution does not work for!</p>
+						
+						<h4><a name="backend-news-add">Add news</a><a class="toplink" href="#">Back to top</a></h4>
+						
+							<p>For adding an entry click the "Add"-Button (the green plus-symbol). If either the "Link" or "Link title" field is empty no link will be added. At the bottom of the form you can choose whether to publish the news entry immediately.</p>
+							
+							<table>
+								<tr>
+									<td><img src="../images/entry/add.png" alt="Add entry." /></td>
+									<td>Add entry.</td>
+								</tr>
+							</table>
+							
+							<img src="news-add-entry.png" alt="Add entry." />
+							
+							<p>Successfully created entry:</p>
+							<img src="news-added-entry.png" alt="Successfully added entry." />
+							
+						<h4><a name="backend-news-publish">Publish news</a><a class="toplink" href="#">Back to top</a></h4>
+						
+							<p>To publish an entry there are three options:</p>
+							
+							<ul>
+								<li>Publish the entry immediately with the creation, see <a href="#backend-news-add">Add news</a>.</li>
+								<li>Publish the entry after the creation using the <a href="#backend-news-edit">Edit news</a> option.</li>
+								<li>Publish the entry using the "Publish" button in the list of all entries.</li>
+							</ul>
+							
+							<table>
+								<tr>
+									<td><img src="../images/entry/publish.png" alt="Publish entry." /></td>
+									<td>Publish entry.</td>
+								</tr>
+							</table>
+						
+							<p>The publishing date will be the last editing date with option "Publish" chosen. So after editing an entry, the publishing date will be reset.</p>
+						
+						<h4><a name="backend-news-takeout">Take out news</a><a class="toplink" href="#">Back to top</a></h4>
+						
+							<p>An entry is taken out if he is not seen publicly. So "taken out" means the opposite of "published". There are two options:</p>
+							
+							<ul>
+								<li>Take out the entry using the <a href="#backend-news-edit">Edit news</a> option.</li>
+								<li>Take out the entry using the "Take out" button in the list of all entries.</li>
+							</ul>
+							
+							<table>
+								<tr>
+									<td><img src="../images/entry/take-out.png" alt="Take out entry." /></td>
+									<td>Take out entry.</td>
+								</tr>
+							</table>
+						
+						<h4><a name="backend-news-edit">Edit news</a><a class="toplink" href="#">Back to top</a></h4>
+						
+							<p>Editing an entry is similar to adding a new one. For editing a video click the "Edit" button in the row of the entry. You will see the form filled with the current data. At the bottom you can choose to publish the entry.</p>
+						
+							<table>
+								<tr>
+									<td><img src="../images/entry/edit.png" alt="Edit entry." /></td>
+									<td>Edit entry.</td>
+								</tr>
+							</table>
+						
+						<h4><a name="backend-news-delete">Delete news</a><a class="toplink" href="#">Back to top</a></h4>
+						
+							<p>For deleting an entry click the "Delete" button in the row of the entry.</p>
+							
+							<table>
+								<tr>
+									<td><img src="../images/entry/delete.png" alt="Delete entry." /></td>
+									<td>Delete entry.</td>
+								</tr>
+							</table>
+							
+							<img src="news-delete-entry.png" alt="Delete entry." />
+							
+							<p>After clicking "I'm sure.":</p>
+							<img src="news-deleted-entry.png" alt="Successfully deleted entry." />
+				
+				<h2><a name="custom-styling">Custom styling</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<p>Custom styling can either be done in the templates stylesheet or by modifying the plugin's stylesheet. The plugin's stylesheet is located in plugins/news/css. Delete the frontend part in the stylesheet of the plugin if you want to do custom styling in the template's stylesheet.</p>
+					
+					<p>The frontend part of the stylesheet looks like this:</p>
+					
+					<pre class="brush: css">
+/*
+ * Frontend style.
+ */
+/* Entry div. */
+.news-entry {
+	margin: 1.5em auto;
+}
+/* Entry's title div. */
+.news-entry-title {
+	font-weight: bold;
+	font-size: 12pt;
+	padding: 5px 0;
+	margin-bottom: .5em;
+	border-bottom: 1px solid #777;
+}
+/* Entry's date span (in title). */
+.news-entry-title-date {
+	float: right;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 10pt;
+}
+/* Entry's short description div. */
+.news-entry-short {
+	
+}
+/* Entry's description div. */
+.news-entry-description {
+	
+}
+/* Entry's link div. */
+.news-entry-link {
+	display: block;
+}
+
+/* News archive div. */
+.news-archive {
+	width: 100%;
+	padding: 2%;
+}
+/* News archive header. */
+.news-archive-header {
+	font-size: 16pt;
+	margin-bottom: 1em;
+	font-weight: bold;
+}
+/* News archive footer. */
+table.news-archive-footer {
+	width: 100%;
+}
+
+/**
+ * 	Newsticker.
+ */
+.newsticker-wrapper {
+	height: 20px;
+}
+
+.newsticker-title {
+	font-weight: bold;
+	margin: 0;
+	float: left;
+	width: 10%;
+	padding: 1% 0;
+}
+
+.newsticker-content {
+	margin: 0;
+	float: left;
+	width: 70%;
+	padding: 1% 0;
+}
+
+/* Li of the entry. */
+.newsticker-wrapper .newsticker-entry {
+	width: 100%;
+}
+
+/* Date of the entry. */
+.newsticker-wrapper .newsticker-entry-date {
+	margin-right: 1em;
+}
+
+.newsticker-wrapper .newsticker-entry-title {
+	margin-right: 1em;
+}
+
+/* Link of the entry. */
+.newsticker-wrapper .newsticker-entry-link {
+	
+}
+
+.newsticker-wrapper .newsticker-controls {
+	list-style-type: none;
+	float: right;
+	width: 48px;
+	margin: 1% 0;
+}
+.newsticker-wrapper .newsticker-controls li {
+	float: left;
+	cursor: pointer;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause {
+	background-image: url('../images/newsticker/pause.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.over {
+	background-image: url('../images/newsticker/pause.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.down {
+	background-image: url('../images/newsticker/pause.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.paused {
+	background-image: url('../images/newsticker/play.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.paused.over {
+	background-image: url('../images/newsticker/play.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.paused.down {
+	background-image: url('../images/newsticker/play.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-prev {
+	background-image: url('../images/newsticker/previous.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-prev.over {
+	background-image: url('../images/newsticker/previous.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-prev.down {
+	background-image: url('../images/newsticker/previous.png');		
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-next {
+	background-image: url('../images/newsticker/next.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-next.over {
+	background-image: url('../images/newsticker/next.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-next.down {	
+	background-image: url('../images/newsticker/next.png');	
+}
+
+/* Newsslider driver. */
+/* Main window containing the ul (not the controls and pager). */
+.bx-window {
+	
+}
+
+/* Main li with entry content. */
+.newsslider-entry, .bx-window li {
+	padding: 10px;
+}
+
+.newsslider-entry-title {
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+.newsslider-entry-title-date {
+	font-size: 10pt;
+	font-style: italic;
+	font-weight: normal;
+	margin-left: 2em;
+}
+
+.newsslider-entry-description {
+	
+}
+
+.newsslider-entry-date {
+	
+}
+
+/**
+ * 	Blockquotes.
+ */
+.blockquotes-entry {
+	
+}
+
+.blockquotes-entry-title {
+	font-size: 18px;
+}
+
+.blockquotes-entry-short p {
+	font-size: 14px;
+}
+
+.blockquotes-entry-date {
+	
+}
+
+/**
+ * Newsscroller.
+ */
+.newsscroller-container { 
+    width: 400px; 
+    height: 27px; 
+    margin: 0; 
+    padding: 0;
+    overflow: hidden; 
+}
+.newsscroller-mask {
+    position: relative;
+    left: 10px;
+    top: 8px;
+    width: 380px;
+    overflow: hidden;
+}
+ul.newsscroller {
+    position: relative;
+    left: 380px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+ul.newsscroller li {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+ul.newsscroller li a {
+    white-space: nowrap;
+    padding: 0;
+    margin: 0 50px 0 0;
+} 
+ul.newsscroller li span {
+    margin: 0 10px 0 0;
+}
+					</pre>
+					
+					<p>Classes:</p>
+					
+					<ul>
+						<li><b>news-entry</b>: The div around every entry.</li>
+						<li><b>news-entry-title</b>: The div of the title and the publishing date.</li>
+						<li><b>news-entry-title-date</b>: The span of the date part of the title.</li>
+						<li><b>news-entry-short</b>: The short description div of the entry.</li>
+						<li><b>news-entry-description</b>: The description div of the entry.</li>
+						<li><b>news-entry-link</b>: The link div of the entry.</li>
+						<li><b>newsticker-wrapper</b>: A wrapper around the whole newsticker.</li>
+						<li><b>newsticker-content</b>: The newsticker's content area, here the entries will be shown.</li>
+						<li><b>newsticker-title</b>: The title of the newsticker.</li>
+						<li><b>newsticker-entry</b>: The li of each entry shown.</li>
+						<li><b>newsticker-entry-date</b>: The date of the entry.</li>
+						<li><b>newsticker-entry-title</b>: The title of the entry (only the title of an entry will be displayed, so this could also be defined as the content area of the entry).</li>
+						<li><b>newsticker-entry-link</b>: If an link is given this is the span of the link.</li>
+						<li><b>newsticker-controles</b>: The list of the controls (ul). All controls have 2 events: 'over' and 'down', defining mouse over and mouse pressed.</li>
+						<li><b>newsticker-play-pause</b>: The play/pause button of the controls. If it is currently paused the class is 'newsticker-play-pause.paused'.</li>
+						<li><b>newsticker-prev</b>: The previous button.</li>
+						<li><b>newsticker-next</b>: The next button.</li>
+						<li><b>bx-window</b>: The div cointainer surrounding the whole slider.</li>
+						<li><b>newsslider-entry-title</b>: The div container of the title.</li>
+						<li><b>newsslider-entry-title-date</b>: The span of the date within the title div.</li>
+						<li><b>newsslider-entry-description</b>: The div container of the description.</li>
+						<li><b>newsslider-entry-link</b>: The div container of the link.</li>
+					</ul>
+				
+				<h2><a name="icons">Icons</a><a class="toplink" href="#">Back to top</a></h2>
+					
+					<p>All icons used in backend of this plugin are part of the spirit20 icons set (licensed under GPL). See <a href="http://19eighty7.com/icons">here</a> for the complete set. Thanks to Dale Morrell for this great set of icons!</p>
+					<p>The icons used for the newsticker controls are part of the splashyfish icons set (free for comemrcial use). See <a href="http://splashyfish.com/sketches/comments/splashy-icons-an-icon-library-for-prototyping">here</a> for the complete set. Thanks to Dat Nguyen for this great set, too!</p>
+				
+				<h2><a name="notes">Notes</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<p>The plugin was tested, but there may still be bugs.<br />
+					If you are using the plugin: Support the development by making bug reports and giving ideas how to improve the plugin.<br />
+					As platform you can use the SourceForge project's page: <a href="http://sourceforge.net/projects/cmsimplenews/" target="_blank">SourceForge project</a></p>
+					
+					<p>David Stutz<br />
+					davidstutz@web.de</p>
+				
+				<h2><a name="changelog">Changelog</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<h3><a name="changelog-1-1">Version 1.1 Beta</a><a class="toplink" href="#">Back to top</a></h3>
+						
+                        <p><b>Beta 17.</b></p>
+                    
+                        <ul>
+                            <li>Bugfix concerning the <b>blog</b> option: <a href="https://sourceforge.net/p/cmsimplenews/discussion/help/thread/0bf9ea05/?limit=25#c615">https://sourceforge.net/p/cmsimplenews/discussion/help/thread/0bf9ea05/?limit=25#c615</a></li>
+                        </ul>
+                    
+                        <p><b>Beta 16.</b></p>
+                    
+                        <ul>
+                            <li>News category configuration option <b>news_link</b>.</li>
+                            <li>Minor bug fixes.</li>
+                            <li>Update to support CMSimple XH 1.6.x.</li>
+                        </ul>
+                        
+                        <p><b>Beta 15.</b></p>
+                    
+                        <ul>
+                            <li>Added a newsscroller based on <a href="http://www.gcmingati.net/wordpress/wp-content/lab/jquery/newsticker/jq-liscroll/scrollanimate.html">liScroller</a>.</li>
+                            <li>Updated ID for calling the newsscroller or newsticker to use both for the same category on the same page.
+                        </ul>
+                        
+                        <p><b>Beta 14.</b></p>
+                        <ul>
+                            <li>Updated newsticker to use multiple newsticker on one page including newsticker within templates, see <a href="#usage-template-newsticker">Calling the newsticker in the template</a></li>
+                        </ul>
+                        
+                        <p><b>Beta 13.</b></p>
+                        <ul>
+                            <li>Updated RSS feed.</li>
+                            <li>Added category configuration for rss link.</li>
+                        </ul>
+                    
+                        <p><b>Beta 12.</b></p>
+                        <ul>
+                            <li>Sorting of categories. See 'news_categories_sort_asc' configuration option.</li>
+                        </ul>
+                    
+						<p><b>Beta 11.</b></p>
+						<ul>
+							<li>Minor fixes.</li>
+							<li>Added <code>version.nfo</code>.</li>
+						</ul>
+						
+						<p><b>Beta 9 and 10.</b></p>
+						
+						<ul>
+							<li>Minor changes (mostly refactoring) and updated documentation.</li>
+						</ul>
+						
+						<p><b>Beta 8.</b></p>
+						
+						<ul>
+							<li>Updated to jQuery 1.9.</li>
+							<li>Added new call &quot;blockquotes&quot; which displays the entries using the blockquote html tag.</li>
+							<li>Used jQuery files in the case jQuery4CMSimple is not installed can be configured.</li>
+							<li>Added missing configuration help.</li>
+							<li>Minor changes and updated documentation.</li>
+						</ul>
+						
+						<p><b>Up to beta 7.</b></p>
+						
+						<ul>
+							<li>Added the 'blog' option to enable/disable the fulltext of entries.</li>
+							<li>Added possibility to fix some publishing date in the future.</li>
+							<li>Fixed a magic_quotes_gpc issue.</li>
+							<li>Got rid of str_getcsv().</li>
+							<li>Migrated from functional programming to object-oriented programming.</li>
+							<li>Added RSS feed (rss.php).</li>
+							<li>Added possibility of category configuration.</li>
+							<li>Added pagination in Backend.</li>
+							<li>Added instant publishing and taking out of entries.</li>
+							<li>Added quick help for some pages.</li>
+							<li>Added newsslider.</li>
+							<li>Added news archive with pagination.</li>
+							<li>Added newscase.</li>
+							<li>A lot of minor changes.</li>
+						</ul>
+				
+				<h2><a name="license">License</a><a class="toplink" href="#">Back to top</a></h2>
+				
+					<h3><a name="license-plugin">The plugin's license</a><a class="toplink" href="#">Back to top</a></h3>
+						
+						<p>Copyright 2012, 2013 David Stutz</p>
+						
+						<p>The plugin is published under the GNU Public License Version 3. For more information see: <a href="http://www.gnu.org/licenses/" target="_blank">GNU Licenses</a></p>
+					
+						<p>The plugin is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+					
+						<p>The plugin is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+						
+					<h3><a name="license-jQuery">jQuery</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						See <a href="http://jQuery.org/license/" target="_blank">here</a> for license information.
+						
+					<h3><a name="license-newsticker">Newsticker</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						See <a href="http://www.jQuerynewsticker.com/" target="_blank">here</a> for license information.	
+                        
+                    <h3><a name="license-newsscroller">Newsscroller</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						See <a href="http://www.gcmingati.net/wordpress/wp-content/lab/jquery/newsticker/jq-liscroll/scrollanimate.html" target="_blank">here</a> for license information.
+						
+					<h3><a name="license-newsticker">Newsticker</a><a class="toplink" href="#">Back to top</a></h3>
+					
+						See <a href="http://bxslider.com/" target="_blank">here</a> for license information.
+						
+		</div>
+		<script type="text/javascript">
+		     SyntaxHighlighter.all()
+		</script>
+	</body>
+</html>

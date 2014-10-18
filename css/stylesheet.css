@@ -1,0 +1,349 @@
+/**
+ * @file css/stylesheet.css
+ * @brief Containing frontend and backend style.
+ * 
+ * @author David Stutz
+ * @version 1.1.0
+ * @license GPLv3
+ * @package news
+ * @see http://sourceforge.net/projects/cmsimplenews/
+ * 
+ *  This file is part of the news plugin for CMSimple.
+ *
+ *  The plugin is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The plugin is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU General Public License for more details.
+ *
+ *  @see <http://www.gnu.org/licenses/>.
+ */
+ /*
+ * Frontend style.
+ */
+/* Entry div. */
+.news-entry {
+	margin: 1.5em auto;
+}
+/* Entry's title div. */
+.news-entry-title {
+	font-weight: bold;
+	font-size: 12pt;
+	padding: 5px 0;
+	margin-bottom: .5em;
+	border-bottom: 1px solid #777;
+}
+/* Entry's date span (in title). */
+.news-entry-title-date {
+	float: right;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 10pt;
+}
+/* Entry's short description div. */
+.news-entry-short {
+	
+}
+/* Entry's description div. */
+.news-entry-description {
+	
+}
+/* Entry's link div. */
+.news-entry-link {
+	display: block;
+}
+
+/* News archive div. */
+.news-archive {
+	width: 100%;
+	padding: 2%;
+}
+/* News archive header. */
+.news-archive-header {
+	font-size: 16pt;
+	margin-bottom: 1em;
+	font-weight: bold;
+}
+/* News archive footer. */
+table.news-archive-footer {
+	width: 100%;
+}
+
+/**
+ * 	Newsticker.
+ */
+.newsticker-wrapper {
+	height: 20px;
+}
+
+.newsticker-title {
+	font-weight: bold;
+	margin: 0;
+	float: left;
+	width: 10%;
+	padding: 1% 0;
+}
+
+.newsticker-content {
+	margin: 0;
+	float: left;
+	width: 70%;
+	padding: 1% 0;
+}
+
+/* Li of the entry. */
+.newsticker-wrapper .newsticker-entry {
+	width: 100%;
+}
+
+/* Date of the entry. */
+.newsticker-wrapper .newsticker-entry-date {
+	margin-right: 1em;
+}
+
+.newsticker-wrapper .newsticker-entry-title {
+	margin-right: 1em;
+}
+
+/* Link of the entry. */
+.newsticker-wrapper .newsticker-entry-link {
+	
+}
+
+.newsticker-wrapper .newsticker-controls {
+	list-style-type: none;
+	float: right;
+	width: 48px;
+	margin: 1% 0;
+}
+.newsticker-wrapper .newsticker-controls li {
+	float: left;
+	cursor: pointer;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause {
+	background-image: url('../images/newsticker/pause.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.over {
+	background-image: url('../images/newsticker/pause.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.down {
+	background-image: url('../images/newsticker/pause.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.paused {
+	background-image: url('../images/newsticker/play.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.paused.over {
+	background-image: url('../images/newsticker/play.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-play-pause.paused.down {
+	background-image: url('../images/newsticker/play.png');
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-prev {
+	background-image: url('../images/newsticker/previous.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-prev.over {
+	background-image: url('../images/newsticker/previous.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-prev.down {
+	background-image: url('../images/newsticker/previous.png');		
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-next {
+	background-image: url('../images/newsticker/next.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-next.over {
+	background-image: url('../images/newsticker/next.png');	
+}
+.newsticker-wrapper .newsticker-controls li.newsticker-next.down {	
+	background-image: url('../images/newsticker/next.png');	
+}
+
+/* Newsslider driver. */
+/* Main window containing the ul (not the controls and pager). */
+.bx-window {
+	
+}
+
+/* Main li with entry content. */
+.newsslider-entry, .bx-window li {
+	padding: 10px;
+}
+
+.newsslider-entry-title {
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+.newsslider-entry-title-date {
+	font-size: 10pt;
+	font-style: italic;
+	font-weight: normal;
+	margin-left: 2em;
+}
+
+.newsslider-entry-description {
+	
+}
+
+.newsslider-entry-date {
+	
+}
+
+/**
+ * 	Blockquotes.
+ */
+.blockquotes-entry {
+	
+}
+
+.blockquotes-entry-title {
+	font-size: 18px;
+}
+
+.blockquotes-entry-short p {
+	font-size: 14px;
+}
+
+.blockquotes-entry-date {
+	
+}
+
+/**
+ * Newsscroller.
+ */
+.newsscroller-container { 
+    width: 100%; 
+    height: 27px; 
+    margin: 0; 
+    padding: 0;
+    overflow: hidden; 
+}
+.newsscroller-mask {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+ul.newsscroller {
+    position: relative;
+    left: 380px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+ul.newsscroller li {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+ul.newsscroller li a {
+    white-space: nowrap;
+    padding: 0;
+    margin: 0 50px 0 0;
+} 
+ul.newsscroller li span {
+    margin: 0 10px 0 0;
+}
+
+/*
+ * Backend style.
+ * No changes needed.
+ */
+
+.news-head {
+	margin-bottom: .5em;
+}
+
+.news-submit {
+	cursor: pointer;
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px !important;
+	height:32px !important;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}
+.news-submit:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}
+.news-submit:active {
+	position:relative;
+	top:1px;
+}
+.news-small {
+	font-size: 80%;
+}
+.news-error, .news-success, .news-help, .news-notice {
+	padding: .8em .8em .8em 2.6em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	border: 2px solid #ddd;
+}
+.news-error {
+	color:#8a1f11;
+	border-color:#FBC2C4;
+	background: #FBE3E4 url('../images/error.png') scroll no-repeat .8em .8em;
+}
+.news-success {
+	color:#264409;
+	border-color:#C6D880;
+	background: #E6EFC2 url('../images/success.png') scroll no-repeat .8em .8em;
+}
+.news-help {
+	color: #3E6DB1;
+	border-color: #3E6DB1;
+	background: #BDCDE3 url('../images/help.png') scroll no-repeat .8em .8em;
+}
+.news-notice {
+	background:#FFF6BF;
+	color:#514721;
+	border-color:#FFD324;
+}
+table.news-help {
+	color: #3E6DB1;
+	border-color: #3E6DB1;
+	background-image: none;
+}
+.news-select {
+	width: 30%;
+	min-width: 80px;
+}
+.news-editor-short {
+	max-height: 120px;
+}
+.news-collapsed {
+	background-image: url(../images/collapsed.png);
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	padding-left: 20px;
+}
+.news-shown {
+	background-image: url(../images/shown.png);
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	padding-left: 20px;
+}
+.news-input-title {
+	max-width: 90%;
+	width: 90%;
+}
