@@ -1,7 +1,5 @@
 Copyright 2012 - 2014 David Stutz
 
-This file is part of the news plugin for CMSimple.
-
 The plugin is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
