@@ -8,7 +8,31 @@ Documentation: [http://davidstutz.de/cmsimple/plugins/news/help/help_en.htm](htt
 
 **Outdated** Sourceforge project: [https://sourceforge.net/projects/cmsimplenews/](https://sourceforge.net/projects/cmsimplenews/).
 
+Other CMSimple plugins:
+
+* [CMSimple Pictures](https://github.com/davidstutz/cmsimple-pictures): allows to create and manage image galleries and sliders.
+* [CMSimple Youtube](https://github.com/davidstutz/cmsimple-youtube): allows to create and manage youtube video galleries.
+
+## Requirements & Compatibility
+
+Requires PHP 5 or higher.
+
+**Recommended: [CMSimple XH](http://www.cmsimple-xh.org/) 1.5 or higher!**
+
+Supports [Hi_updatecheck](http://cmsimple.holgerirmler.de/en/?Plugins:UpdateCheck).
+
+Also tested on:
+
+* CMSimple XH 1.4.2 and 1.1.4.
+* CMSimple Realblog 1.5 or higher.
+
 ## Changelog
+
+### 1.1.1
+
+* Minor fixes, additional tests for CMSimple XH 1.6.4.
+
+### 1.1.0
 
 **Beta 17.**
 

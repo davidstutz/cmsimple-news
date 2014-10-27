@@ -58,6 +58,7 @@ if (isset($news))
 				. 'Released: ' . News::release_date() . '<br />'
 				. 'Author: ' . News::author() . '<br />'
 				. 'Website: ' . News::website() . '<br />'
+                                . 'GitHub Repository/Releases: ' . News::github() . '<br />'
 				. News::description() . '<br />'
 				. News::legal() . '<br />'
 				. '</div>';

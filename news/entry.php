@@ -219,7 +219,7 @@ class News_Entry {
 	 */
 	public function published()
 	{
-		return $this->_state <= (strtotime('today') + 86399) AND $this->_state != 0;
+		return $this->_state <= (strtotime('today UTC') + 86399) AND $this->_state != 0;
 	}
 	
     /**

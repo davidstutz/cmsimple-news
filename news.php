@@ -93,7 +93,7 @@ class News {
 	/**
 	 * Version.
 	 */
-	const VERSION = '1.1.0';
+	const VERSION = '1.1.1';
 	
 	/**
 	 * @static
@@ -182,7 +182,7 @@ class News {
 	 */
 	public static function release_date() 
 	{
-	   return "18th October 2014";
+	   return "27th October 2014";
 	}
 
 	/**
@@ -209,6 +209,18 @@ class News {
 		return '<a href="http://davidstutz.de/cmsimple/?News" target="_blank">Project Webpage</a>';
 	}
 	
+        /**
+         * @public
+         * @static
+         * Get plugin's GitHub repo.
+         * 
+         * @return <string> GitHub link
+         */
+        public static function github()
+        {
+		return '<a target="_blank" href="https://github.com/davidstutz/cmsimple-news" target="_blank">GitHub Project</a>';
+        }
+        
 	/**
 	 * @static
 	 * @public
