@@ -4,7 +4,7 @@ CMSimple News is a CMSimple plugin for publishing and managing news. The plugin 
 
 Project page: [http://davidstutz.de/cmsimple/?News](http://davidstutz.de/cmsimple/?News).
 
-Documentation: [http://davidstutz.de/cmsimple/plugins/news/help/help_en.htm](http://davidstutz.de/cmsimple/plugins/news/help/help_en.htm).
+Documentation: [http://davidstutz.github.io/cmsimple-news/help/help_en.htm](http://davidstutz.github.io/cmsimple-news/help/help_en.htm).
 
 **Outdated** Sourceforge project: [https://sourceforge.net/projects/cmsimplenews/](https://sourceforge.net/projects/cmsimplenews/).
 
