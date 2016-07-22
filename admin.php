@@ -144,6 +144,9 @@ if (isset($news))
 		 */
 		if (isset($_POST['add']))
 		{
+			if (isset($_XH_csrfProtection)) {
+				$_XH_csrfProtection->check();
+			}
 			$entry = new News_Entry(time(), $category);
 			$entry->title(stsl($_POST['title']));
 			$entry->description(News::blog() ? stsl($_POST['description']) : '');
@@ -160,6 +163,9 @@ if (isset($news))
 		 */
 		if (isset($_POST['delete']))
 		{
+			if (isset($_XH_csrfProtection)) {
+				$_XH_csrfProtection->check();
+			}
 			$entry->delete();
 			unset($entry);
 			
@@ -360,6 +366,9 @@ if (isset($news))
 				if (!empty($_POST['name'])
 					AND !preg_match('#[/\.<>?%*:"]#', $_POST['name']))
 				{
+					if (isset($_XH_csrfProtection)) {
+						$_XH_csrfProtection->check();
+					}
 					$category = new News_Category($_POST['name']);
 					$o .= '<div class="news-success">' . News::$tx["Successfully created new category."] . '</div>';
 				}
@@ -371,8 +380,11 @@ if (isset($news))
 		
 			$o .= '<div class="news-help">' . News::$tx["The category's name should not contain any whitespace or special characters."] . '</div>';	
 
-			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&action=new" method="POST">'
-				. '<table class="edit" width="100%">'
+			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&action=new" method="POST">';
+			if (isset($_XH_csrfProtection)) {
+				$o .= $_XH_csrfProtection->tokenInput();
+			}
+			$o .= '<table class="edit" width="100%">'
 				. '<tr>'
 				. '<td>' . News::$tx["Name"] . '</td>'
 				. '<td><input type="text" name="name" /></td>'
@@ -409,6 +421,9 @@ if (isset($news))
 		{
 			if (isset($_POST['config']))
 			{
+				if (isset($_XH_csrfProtection)) {
+					$_XH_csrfProtection->check();
+				}
 				$category->edit(array(
 					'rss_title' => HTML::chars($_POST['rss_title'], ENT_QUOTES),
 					'rss_description' => HTML::chars($_POST['rss_description'], ENT_QUOTES),
@@ -437,8 +452,11 @@ if (isset($news))
 				$o .= '</table>';
 			}
 			
-			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=config" method="POST">'
-				. '<table class="edit" width="100%">';
+			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=config" method="POST">';
+			if (isset($_XH_csrfProtection)) {
+				$o .= $_XH_csrfProtection->tokenInput();
+			}
+			$o .= '<table class="edit" width="100%">';
 			
 			foreach ($config as $key => $value)
 			{
@@ -462,14 +480,20 @@ if (isset($news))
 		{
 			if (isset($_POST['remove']))
 			{
+				if (isset($_XH_csrfProtection)) {
+					$_XH_csrfProtection->check();
+				}
 				$category->remove();
 				unset($category);
 				$o .= '<div class="news-success">' . News::$tx["Successfully deleted category."] . '</div>';
 			}
 			else
 			{
-				$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=remove" method="POST">'
-					. '<div class="news-notice">' . News::$tx["Are you sure you want to delete the category with all its entries?"] . '</div><button name="remove" type="submit" class="pictures-submit submit">' . News::$tx["I'm sure."] . '</button>'
+				$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=remove" method="POST">';
+				if (isset($_XH_csrfProtection)) {
+					$o .= $_XH_csrfProtection->tokenInput();
+				}
+				$o .= '<div class="news-notice">' . News::$tx["Are you sure you want to delete the category with all its entries?"] . '</div><button name="remove" type="submit" class="pictures-submit submit">' . News::$tx["I'm sure."] . '</button>'
 					. '</form>';
 			}
 		}
@@ -483,8 +507,11 @@ if (isset($news))
 		if ($action == 'add'
 			AND $category !== FALSE)
 		{
-			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=plugin_text" method="POST">'
-				. '<table class="edit" width="100%">'
+			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=plugin_text" method="POST">';
+			if (isset($_XH_csrfProtection)) {
+				$o .= $_XH_csrfProtection->tokenInput();
+			}
+			$o .= '<table class="edit" width="100%">'
 				. '<tr>'
 				. '<td>' . News::$tx["Title"] . '</td>'
 				. '<td><input class="news-input-title" type="text" name="title" /></td>'
@@ -598,6 +625,9 @@ if (isset($news))
 		{
 			if (isset($_POST['edit']))
 			{
+				if (isset($_XH_csrfProtection)) {
+					$_XH_csrfProtection->check();
+				}
 				$entry->title(stsl($_POST['title']));
 				$entry->description(News::blog() ? stsl($_POST['description']) : '');
 				$entry->short(stsl($_POST['short']));
@@ -608,8 +638,11 @@ if (isset($news))
 				$o .= '<div class="news-success">' . News::$tx["Successfully saved changes."] . '</div>';
 			}
 			
-			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=edit&entry=' . $entry->id() . '" method="POST">'
-				. '<table class="edit" width="100%">'
+			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=edit&entry=' . $entry->id() . '" method="POST">';
+			if (isset($_XH_csrfProtection)) {
+				$o .= $_XH_csrfProtection->tokenInput();
+			}
+			$o .= '<table class="edit" width="100%">'
 				. '<tr>'
 				. '<td>' . News::$tx["Title"] . '</td>'
 				. '<td><input class="news-input-title" type="text" name="title" value="'.$entry->title().'" /></td>'
@@ -716,8 +749,11 @@ if (isset($news))
 		if ($action == 'delete'
 			AND $entry !== FALSE)
 		{
-			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=plugin_text&entry=' . $entry->id() . '" method="POST">'
-				. '<div class="news-notice">' . News::$tx["Are you sure you want to delete the entry?"] . '</div><button name="delete" type="submit" class="news-submit submit">' . News::$tx["I'm sure."] . '</button>'
+			$o .= '<form action="' . $sn . '?&news&admin=plugin_main&category=' . $category->name() . '&action=plugin_text&entry=' . $entry->id() . '" method="POST">';
+			if (isset($_XH_csrfProtection)) {
+				$o .= $_XH_csrfProtection->tokenInput();
+			}
+			$o .= '<div class="news-notice">' . News::$tx["Are you sure you want to delete the entry?"] . '</div><button name="delete" type="submit" class="news-submit submit">' . News::$tx["I'm sure."] . '</button>'
 				. '</form>';
 		}
 
