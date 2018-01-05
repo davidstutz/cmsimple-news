@@ -9,7 +9,7 @@
  * @package news
  * @see http://sourceforge.net/projects/cmsimplenews/
  * 
- *  Copyright 2012 - 2014 David Stutz
+ *  Copyright 2012 - 2018 David Stutz
  * 
  * 	This file is part of the news plugin for CMSimple.
  *
@@ -93,7 +93,7 @@ class News {
 	/**
 	 * Version.
 	 */
-	const VERSION = '1.1.1';
+	const VERSION = '1.1.2';
 	
 	/**
 	 * @static
@@ -182,7 +182,7 @@ class News {
 	 */
 	public static function release_date() 
 	{
-	   return "27th October 2014";
+	   return "January 6th 2018";
 	}
 
 	/**

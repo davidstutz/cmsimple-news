@@ -8,7 +8,7 @@
  * @package news
  * @see http://sourceforge.net/projects/cmsimplenews/
  * 
- *  Copyright 2012 - 2014 David Stutz
+ *  Copyright 2012 - 2018 David Stutz
  * 
  * 	This file is part of the news plugin for CMSimple.
  *

@@ -9,7 +9,7 @@
  * @package news
  * @see http://sourceforge.net/projects/cmsimplenews/
  * 
- *  Copyright 2012 - 2014 David Stutz
+ *  Copyright 2012 - 2018 David Stutz
  * 
  * 	This file is part of the news plugin for CMSimple.
  *
@@ -25,15 +25,17 @@
  *
  *  @see <http://www.gnu.org/licenses/>.
  */
-
-if (!defined('CMSIMPLE_XH_VERSION')) {
-	header('HTTP/1.0 403 Forbidden');
-	exit;
-}
  
+/*
+ * Register the plugin menu items.
+ */
+if (function_exists('XH_registerStandardPluginMenuItems')) {
+    XH_registerStandardPluginMenuItems(false);
+}
+
 if (!class_exists('News')) require dirname(__FILE__) . '/news.php';
 
-if (isset($news))
+if (isset($news) OR isset($_GET['news']))
 {
 	global $sn;
 
