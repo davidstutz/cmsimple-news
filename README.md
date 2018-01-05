@@ -29,6 +29,8 @@ Also tested on:
 * CMSimple Realblog 1.5 or higher.
 * CMSimple 4.7.3.
 
+**In CMSimple 4.7 or later, CSRF protection needs to be turned off.**
+
 ## License
 
 Copyright 2012 - 2018 David Stutz
