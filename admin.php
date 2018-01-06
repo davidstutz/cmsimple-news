@@ -25,17 +25,15 @@
  *
  *  @see <http://www.gnu.org/licenses/>.
  */
- 
-/*
- * Register the plugin menu items.
- */
-if (function_exists('XH_registerStandardPluginMenuItems')) {
-    XH_registerStandardPluginMenuItems(false);
-}
 
 if (!class_exists('News')) require dirname(__FILE__) . '/news.php';
 
-if (isset($news) OR isset($_GET['news']))
+if (function_exists('XH_registerStandardPluginMenuItems'))
+{
+    XH_registerStandardPluginMenuItems(true);
+}
+
+if ((function_exists('XH_wantsPluginAdministration') AND XH_wantsPluginAdministration('news')) OR isset($news))
 {
 	global $sn;
 
