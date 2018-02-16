@@ -238,6 +238,7 @@ ul.newsscroller {
 
 }
 ul.newsscroller li {
+    white-space: nowrap;
     float: left;
     margin: 0;
     padding: 0;
