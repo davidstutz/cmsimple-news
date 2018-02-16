@@ -347,3 +347,7 @@ table.news-help {
 	max-width: 90%;
 	width: 90%;
 }
+
+.newscase-entry-title-date {
+    margin-left: 1em;
+}
