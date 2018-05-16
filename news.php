@@ -209,18 +209,30 @@ class News {
 		return '<a href="http://davidstutz.de/cmsimple/?News" target="_blank">Project Webpage</a>';
 	}
 	
-        /**
-         * @public
-         * @static
-         * Get plugin's GitHub repo.
-         * 
-         * @return <string> GitHub link
-         */
-        public static function github()
-        {
+	/**
+	 * @public
+	 * @static
+	 * Get plugin's GitHub repo.
+	 * 
+	 * @return <string> GitHub link
+	 */
+	public static function github()
+	{
 		return '<a target="_blank" href="https://github.com/davidstutz/cmsimple-news" target="_blank">GitHub Project</a>';
-        }
-        
+	}
+		
+	/**
+	 * @public
+	 * @static
+	 * Donate link.
+	 * 
+	 * @return <string> donate string
+	 */
+	public static function donate()
+	{
+		return '<b>Consider <a href="http://davidstutz.de/donate/">donating</a>.</b>';
+	}
+
 	/**
 	 * @static
 	 * @public

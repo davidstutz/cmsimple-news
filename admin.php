@@ -58,7 +58,8 @@ if ((function_exists('XH_wantsPluginAdministration') AND XH_wantsPluginAdministr
 				. 'Released: ' . News::release_date() . '<br />'
 				. 'Author: ' . News::author() . '<br />'
 				. 'Website: ' . News::website() . '<br />'
-                                . 'GitHub Repository/Releases: ' . News::github() . '<br />'
+				. 'GitHub Repository/Releases: ' . News::github() . '<br />'
+				. News::donate() . '<br />'
 				. News::description() . '<br />'
 				. News::legal() . '<br />'
 				. '</div>';
