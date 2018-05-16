@@ -8,6 +8,8 @@ Documentation: [http://davidstutz.de/cmsimpledemo/plugins/news/help/help_en.htm]
 
 Demo: [http://davidstutz.de/cmsimpledemo/?News](http://davidstutz.de/cmsimpledemo/?News)
 
+Also consider [donating](http://davidstutz.de/donate/) to support this plugin.
+
 **Outdated** Sourceforge project: [https://sourceforge.net/projects/cmsimplenews/](https://sourceforge.net/projects/cmsimplenews/).
 
 Other CMSimple plugins:
